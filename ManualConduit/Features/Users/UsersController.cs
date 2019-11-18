@@ -14,6 +14,12 @@ namespace ManualConduit.Features.Users
             _mediator = mediator;
         }
 
+        [HttpPost]
+        public async Task<UserEnvelope> Create([FromBody] Create.Command command)
+        {
+            return await _mediator.Send(command);
+        }
+
         [HttpPost("login")]
         public async Task<UserEnvelope> Login([FromBody] Login.Command command)
         {
