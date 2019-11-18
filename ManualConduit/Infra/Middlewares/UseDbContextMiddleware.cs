@@ -1,11 +1,10 @@
 ﻿using System;
-using ManualConduit.Infra;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Solid.Practices.Middleware;
 
-namespace ManualConduit
+namespace ManualConduit.Infra.Middlewares
 {
     public class UseDbContextMiddleware : IMiddleware<IServiceCollection>
     {

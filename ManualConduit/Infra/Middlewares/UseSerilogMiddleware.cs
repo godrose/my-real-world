@@ -3,7 +3,7 @@ using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
 using Solid.Practices.Middleware;
 
-namespace ManualConduit
+namespace ManualConduit.Infra.Middlewares
 {
     public class UseSerilogMiddleware : IMiddleware<ILoggerFactory>
     {

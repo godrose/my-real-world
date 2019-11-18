@@ -1,10 +1,9 @@
 ﻿using System.Reflection;
-using ManualConduit.Infra;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Solid.Practices.Middleware;
 
-namespace ManualConduit
+namespace ManualConduit.Infra.Middlewares
 {
     public class UseMediatRMiddleware : IMiddleware<IServiceCollection>
     {

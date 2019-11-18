@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Solid.Practices.Middleware;
 
-namespace ManualConduit
+namespace ManualConduit.Infra.Middlewares
 {
     public class UseAutoMapperMiddleware : IMiddleware<IServiceCollection>
     {

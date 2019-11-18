@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using ManualConduit.Infra;
 using ManualConduit.Infra.Errors;
+using ManualConduit.Infra.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

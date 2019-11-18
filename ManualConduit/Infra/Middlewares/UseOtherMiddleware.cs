@@ -1,10 +1,9 @@
-﻿using ManualConduit.Infra;
-using ManualConduit.Infra.Security;
+﻿using ManualConduit.Infra.Security;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Solid.Practices.Middleware;
 
-namespace ManualConduit
+namespace ManualConduit.Infra.Middlewares
 {
     public class UseOtherMiddleware : IMiddleware<IServiceCollection>
     {

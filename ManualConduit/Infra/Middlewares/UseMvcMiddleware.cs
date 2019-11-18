@@ -1,9 +1,8 @@
 ﻿using FluentValidation.AspNetCore;
-using ManualConduit.Infra;
 using Microsoft.Extensions.DependencyInjection;
 using Solid.Practices.Middleware;
 
-namespace ManualConduit
+namespace ManualConduit.Infra.Middlewares
 {
     public class UseMvcMiddleware : IMiddleware<IServiceCollection>
     {
