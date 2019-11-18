@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using ManualConduit.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -12,7 +13,7 @@ namespace ManualConduit.Infra
             : base(options)
         {
         }
-        /*
+        
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Person> Persons { get; set; }
@@ -76,7 +77,7 @@ namespace ManualConduit.Infra
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }
-        */
+        
 
         #region Transaction Handling
         public void BeginTransaction()

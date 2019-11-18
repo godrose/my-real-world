@@ -14,6 +14,7 @@ namespace ManualConduit
         {
             _assembly = assembly;
         }
+
         public IServiceCollection Apply(IServiceCollection @object)
         {
             @object.AddMediatR(_assembly);

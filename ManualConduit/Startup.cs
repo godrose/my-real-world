@@ -36,7 +36,8 @@ namespace ManualConduit
                 new UseCorsMiddleware(),
                 new UseMvcMiddleware(),
                 new UseAutoMapperMiddleware(),
-                new UseJwtMiddleware()
+                new UseJwtMiddleware(),
+                new UseOtherMiddleware()
             };
             MiddlewareApplier.ApplyMiddlewares(services, middlewares);
 
