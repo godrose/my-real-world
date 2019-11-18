@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
+using ManualConduit.Infra;
+using ManualConduit.Infra.Errors;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -28,25 +29,41 @@ namespace ManualConduit
         {
             var middlewares = new IMiddleware<IServiceCollection>[]
             {
-                new UseMediatRMiddleware(Assembly.GetExecutingAssembly()), 
+                new UseMediatRMiddleware(Assembly.GetExecutingAssembly()),
                 new UseDbContextMiddleware(_config),
                 new UseLocalizationMiddleware(),
                 new UseSwaggerMiddleware(),
-                new UseCorsMiddleware(), 
+                new UseCorsMiddleware(),
                 new UseMvcMiddleware(),
-                new UseAutoMapperMiddleware()
+                new UseAutoMapperMiddleware(),
+                new UseJwtMiddleware()
             };
             MiddlewareApplier.ApplyMiddlewares(services, middlewares);
+
             return services;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            app.Run(async (context) =>
+            var loggerFactoryMiddlewares = new IMiddleware<ILoggerFactory>[]
             {
-                await context.Response.WriteAsync("Hello World!");
-            });
+                new UseSerilogMiddleware()
+            };
+            MiddlewareApplier.ApplyMiddlewares(loggerFactory, loggerFactoryMiddlewares);
+            app.UseMiddleware<ErrorHandlingMiddleware>()
+                .UseCors(builder =>
+                builder
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod())
+                .UseMvc()
+                // Enable middleware to serve generated Swagger as a JSON endpoint
+                .UseSwagger(c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; })
+                // Enable middleware to serve swagger-ui assets(HTML, JS, CSS etc.)
+                .UseSwaggerUI(x => { x.SwaggerEndpoint("/swagger/v1/swagger.json", "RealWorld API V1"); });
+
+            app.ApplicationServices.GetRequiredService<ConduitContext>().Database.EnsureCreated();
         }
     }
 }
