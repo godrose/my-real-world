@@ -52,10 +52,11 @@ namespace ManualConduit.Infra.Middlewares
                     {
                         OnMessageReceived = context =>
                         {
+                            const string prefix = "Token ";
                             var token = context.HttpContext.Request.Headers["Authorization"];
-                            if (token.Count > 0 && token[0].StartsWith("Token ", StringComparison.OrdinalIgnoreCase))
+                            if (token.Count > 0 && token[0].StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
                             {
-                                context.Token = token[0].Substring("Token ".Length).Trim();
+                                context.Token = token[0].Substring(prefix.Length).Trim();
                             }
 
                             return Task.CompletedTask;
