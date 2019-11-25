@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using ManualConduit.Features.Articles;
-using ManualConduit.Features.Followers;
 using ManualConduit.Infra.Security;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
